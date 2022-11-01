@@ -25,9 +25,14 @@ function createGalleryMarkup() {
 }
 
 function onImageClick(e) {
-  e.preventDefault(); //Останавливат скачивание (предотвращает действие браузера по умолчанию)
+  e.preventDefault();
+  if (e.target.nodeName !== "IMG") {
+    return;
+  } //Останавливат скачивание (предотвращает действие браузера по умолчанию)
   const instance = basicLightbox.create(
-    `<img width="auto" height="auto" src="${e.target.dataset.source}">`
+    `<img width="auto" height="auto" 
+    src="${e.target.dataset.source}" 
+    alt="${e.target.getAttribute("alt")}">`
   );
   instance.show();
   galleryItemsEl.addEventListener("keydown", (e) => {
